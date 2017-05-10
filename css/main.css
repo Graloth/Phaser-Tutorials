@@ -123,9 +123,12 @@ h1 {
 	border-bottom-style: solid;
 }
 
+h2 {
+	page-break-before: always;
+}
+
 h1, h2, h3 {
 	font-weight: normal;
-	page-break-before: always;
 }
 
 h1 code,
