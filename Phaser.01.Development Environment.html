@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+        <style>
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
+	font-size: 14px;
+	padding: 0 26px;
+	line-height: 22px;
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	color: #4080D0;
+	text-decoration: none;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+h1 code,
+h2 code,
+h3 code,
+h4 code,
+h5 code,
+h6 code {
+	font-size: inherit;
+	line-height: auto;
+}
+
+a:hover {
+	color: #4080D0;
+	text-decoration: underline;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left: 5px solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 14px;
+	line-height: 19px;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+.mac code {
+	font-size: 12px;
+	line-height: 18px;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+/** Theming */
+
+.vscode-light,
+.vscode-light pre code {
+	color: rgb(30, 30, 30);
+}
+
+.vscode-dark,
+.vscode-dark pre code {
+	color: #DDD;
+}
+
+.vscode-high-contrast,
+.vscode-high-contrast pre code {
+	color: white;
+}
+
+.vscode-light code {
+	color: #A31515;
+}
+
+.vscode-dark code {
+	color: #D7BA7D;
+}
+
+.vscode-light pre:not(.hljs),
+.vscode-light code > div {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre:not(.hljs),
+.vscode-dark code > div {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre:not(.hljs),
+.vscode-high-contrast code > div {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+.vscode-light blockquote,
+.vscode-dark blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.vscode-high-contrast blockquote {
+	background: transparent;
+	border-color: #fff;
+}
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+body
+{
+    background-color: white;
+}
+.emoji
+{
+    height: 20px;
+}
+</style>
+    </head>
+    <body>
+        <article class="vscode-light markdown-body">
+            <h1 id="phaser-01-development-environment">Phaser 01 - Development Environment</h1>
+<p>This is the first in a tutorial series that aims to help you get started with the Phaser game framework.<br>
+In this first tutorial, we will focus on getting your development environment installed and properly configured.</p>
+<blockquote>
+<p>None of these tutorials should be considered a <em>complete</em> guide to Phaser, they only server the purpose to get you going.</p>
+</blockquote>
+<!-- vscode-markdown-toc -->
+<ul>
+<li>
+<ol>
+<li><a href="#Prerequisites">Prerequisites</a></li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li><a href="#VisualStudioCode">Visual Studio Code</a></li>
+</ol>
+<ul>
+<li>2.1. <a href="#InstallingVSCode">Installing VSCode</a></li>
+<li>2.2. <a href="#GettingfamiliarwithVSCode">Getting familiar with VSCode</a>
+<ul>
+<li>2.2.1. <a href="#Interface">Interface</a></li>
+<li>2.2.2. <a href="#ActivityBarIcons">Activity Bar Icons</a></li>
+<li>2.2.3. <a href="#IntegratedTerminal">Integrated Terminal</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ol start="3">
+<li><a href="#InitialSetup">Initial Setup</a></li>
+</ol>
+</li>
+<li>
+<ol start="4">
+<li><a href="#MakingPhaserIntellisensework">Making Phaser Intellisense work</a></li>
+</ol>
+</li>
+<li>
+<ol start="5">
+<li><a href="#AddingsomePhaserjavascriptcode">Adding some Phaser javascript code</a></li>
+</ol>
+</li>
+<li>
+<ol start="6">
+<li><a href="#Cross-OriginReferencing">Cross-Origin Referencing</a></li>
+</ol>
+</li>
+<li>
+<ol start="7">
+<li><a href="#Webserver">Webserver</a></li>
+</ol>
+<ul>
+<li>7.1. <a href="#Prerequisites-1">Prerequisites</a></li>
+<li>7.2. <a href="#Keybindingtheservercommand">Keybinding the server command</a>
+<ul>
+<li>7.2.1. <a href="#No-longersilent">No-longer silent</a></li>
+<li>7.2.2. <a href="#Shuttingdowntheserver">Shutting down the server</a></li>
+<li>7.2.3. <a href="#Keybindingitall">Keybinding it all</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ol start="8">
+<li><a href="#DisablingCaching">Disabling Caching</a></li>
+</ol>
+</li>
+<li>
+<ol start="9">
+<li><a href="#DebuggingPhaser">Debugging Phaser</a></li>
+</ol>
+<ul>
+<li>9.1. <a href="#DebugginginGoogleChrome">Debugging in Google Chrome</a></li>
+<li>9.2. <a href="#Breakpoints">Breakpoints</a></li>
+<li>9.3. <a href="#Sendingmessagestothedebugconsole.">Sending messages to the debug console.</a></li>
+</ul>
+</li>
+<li>
+<ol start="10">
+<li><a href="#TyposErrorsetc.">Typos, Errors, etc.</a></li>
+</ol>
+<ul>
+<li>10.1. <a href="#Bonusstuff">Bonus stuff</a></li>
+</ul>
+</li>
+</ul>
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+<h2 id="1-prerequisites">1. <a name='Prerequisites'></a>Prerequisites</h2>
+<p>In order to follow along more easily in this tutorial, I highly recommend you download the following items.</p>
+<ol>
+<li>Download and install <a href="https://code.visualstudio.com/">Visual Studio Code</a>.
+<ul>
+<li>Special installation instructions below.</li>
+</ul>
+</li>
+<li>Download the latest version of <a href="https://phaser.io/">Phaser</a>.
+<ul>
+<li>Download the full zip-file version.</li>
+</ul>
+</li>
+<li>Download and install <a href="https://nodejs.org/en/download/">Node.js</a>.</li>
+</ol>
+<p>Depending on your operating system, you may have to restart your computer after installing Visual Studio Code and/or Node.js.</p>
+<h2 id="2-visual-studio-code">2. <a name='VisualStudioCode'></a>Visual Studio Code</h2>
+<p><a href="https://code.visualstudio.com/">Visual Studio Code</a> is a simple, text-only, programming editor. While you can get larger and more feature rich editors, such as the full Visual Studio, we only need simple features.<br>
+From here on out, I will refer to Visual Studio Code, as VSCode.</p>
+<h3 id="21-installing-vscode">2.1. <a name='InstallingVSCode'></a>Installing VSCode</h3>
+<p>At some point during the install of VSCode, you will see a screen similar to the one below.<br>
+In order to make your life a while lot easier, make sure the following options are checked:</p>
+<ul>
+<li>Both &quot;Open with Code&quot; options</li>
+<li>Add to PATH option.</li>
+</ul>
+<p>You can also have it create a desktop icon for easier access to VSCode in the future.</p>
+<p><img src="c:/Projects/Personal/phaser-tutorial/assets/vscode-install.png" alt="Visual Studio Code Interface"></p>
+<blockquote>
+<p>The above image highlights the options that helps make your life easier when working with VSCode.</p>
+</blockquote>
+<h3 id="22-getting-familiar-with-vscode">2.2. <a name='GettingfamiliarwithVSCode'></a>Getting familiar with VSCode</h3>
+<p>It is a good idea to get familiar with some of the areas of VSCode, as I will refer to these names throughout the tutorial. If you want a full list of tips and tricks for VSCode, you can look here: <a href="https://github.com/Microsoft/vscode-tips-and-tricks">Collection of helpful tips and tricks for VSCode</a></p>
+<h4 id="221-interface">2.2.1. <a name='Interface'></a>Interface</h4>
+<p>You can find a full description of all the interface features here: <a href="https://code.visualstudio.com/docs/getstarted/userinterface">[LINK]</a>, but I will primarily reference what is shown in this image.</p>
+<p><img src="c:/Projects/Personal/phaser-tutorial/assets/panelNames.png" alt="Visual Studio Code Interface"></p>
+<h4 id="222-activity-bar-icons">2.2.2. <a name='ActivityBarIcons'></a>Activity Bar Icons</h4>
+<p>These icons represent the main/primary functionalities of VSCode, and as such you will likely be referring to them quite often.</p>
+<p><img src="c:/Projects/Personal/phaser-tutorial/assets/iconNames.png" alt="Activity Bar Icons"></p>
+<h4 id="223-integrated-terminal">2.2.3. <a name='IntegratedTerminal'></a>Integrated Terminal</h4>
+<p>We will also use the integrated terminal, which you can show by going to <strong>[View➞Integrated Terminal]</strong> (this will also tell you the keyboard shortcut for it, right next to it).</p>
+<p><img src="c:/Projects/Personal/phaser-tutorial/assets/terminal.png" alt="Integrated Terminal"></p>
+<h2 id="3-initial-setup">3. <a name='InitialSetup'></a>Initial Setup</h2>
+<p>We need to get our project set up so that we can begin.</p>
+<blockquote>
+<p><strong>NOTE:</strong> If a folder name is written as <code>folder/</code>, you should <strong>not</strong> add the forward-slash <code>/</code> to the folder name. I only include those slashes in the folder names here, as that is how folders are viewed by many operating systems.</p>
+</blockquote>
+<ol>
+<li>Create a folder for your project, if you want to use Version Control like Git, make a repository and clone it to your local machine.</li>
+<li>Right-click the folder and choose <strong>[Open with Code]</strong>, if you do not have that option, simply open VSCode normally and choose <strong>[File➞Open Folder]</strong>.</li>
+<li>In the Side Bar, right-click below where your projects folder name is and choose <strong>[New Folder]</strong>, do this several times and create the following folders:
+<ul>
+<li><code>assets/</code></li>
+<li><code>css/</code></li>
+<li><code>js/</code></li>
+<li><code>js/vendor/</code></li>
+<li><code>defs/</code></li>
+</ul>
+</li>
+<li>In your <code>js/</code> folder, create a new file named <code>game.js</code>, you can leave it empty for now, but this is where we will add our game code.</li>
+<li>Open the downloaded <em>Phaser</em> zip-file, and inside the <code>build</code> folder, copy all the files to your <code>js/vendor/</code> folder, <strong>except</strong> the following files:
+<ul>
+<li>the <code>custom/</code> folder</li>
+<li><code>config.php</code></li>
+</ul>
+</li>
+<li>In the root of your project, create a new file named <code>index.html</code>, and add the following content:</li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-meta">&lt;!DOCTYPE html&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"en"</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"UTF-8"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"viewport"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"width=device-width, initial-scale=1.0"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">"X-UA-Compatible"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"ie=edge"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Phaser Test<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Phaser Test<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"content"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text/javascript"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"./js/vendor/phaser.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text/javascript"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"./js/game.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</div></code></pre>
+<blockquote>
+<p><strong>Note #1:</strong> In Visual Studio Code, in HTML documents as well as CSS files, you have access to <a href="https://emmet.io/">Emmet</a>, a code completion tool that will save you time typing common code, I highly recommend you check it out yourself.<br>
+<em>Example: In a blank HTML document, type <code>!</code> followed by hitting your [TAB] key twice, this will auto-generate some of the code above.</em></p>
+</blockquote>
+<blockquote>
+<p><strong>Note #2:</strong> Adding the <code>&lt;script&gt;</code>-tags at the bottom of the <code>&lt;body&gt;</code>-tags, ensures that the document's markup (also known as DOM), is fully loaded before our scripts are. This way we can assume it loaded when working with it in Javascript.</p>
+</blockquote>
+<h2 id="4-making-phaser-intellisense-work">4. <a name='MakingPhaserIntellisensework'></a>Making Phaser Intellisense work</h2>
+<p>In order to get Phase Intellisense to properly work, some files need to be copied and created.</p>
+<ol>
+<li>Open the <code>defs/</code> folder in your file browser.</li>
+<li>Open the downloaded <em>Phaser</em> zip-file, and inside the <code>typescript</code> folder, copy the following file to your <code>defs/</code> folder:
+<ul>
+<li><code>box2d.d.ts</code></li>
+<li><code>p2.d.ts</code></li>
+<li><code>phaser.comments.d.ts</code></li>
+<li><code>phaser_box2d.d.ts</code></li>
+<li><code>pixi.comments.d.ts</code></li>
+<li><code>tslint.json</code></li>
+<li><code>typings.json</code></li>
+</ul>
+</li>
+</ol>
+<p>The files inside the <code>defs/</code> folder are needed to make VSCode's intellisense recognize Phaser, but even after all this, it still won't work, we need <em>one</em> more thing done for intellisense to work.<br>
+In the root of your project, create a new file named <code>jsconfig.json</code>, with the following content inside:</p>
+<pre class="hljs"><code><div>{ }
+</div></code></pre>
+<p>This simply tells VSCode that your project is a Javascript project, and then it looks for additional definitions in the <code>defs/</code> folder, and loads them for intellisense.</p>
+<blockquote>
+<p>You can add settings to your <code>jsconfig.json</code> file, but it is outside the scope of this tutorial to explain that.</p>
+</blockquote>
+<h2 id="5-adding-some-phaser-javascript-code">5. <a name='AddingsomePhaserjavascriptcode'></a>Adding some Phaser javascript code</h2>
+<p>In this chapter we will add some Phaser code, it is only very basic code and not a fully functional game, for that you can find other tutorials.</p>
+<p>This chapter is also a perfect opportunity for you to test out how the Intellisense now work.</p>
+<p>Open your <code>game.js</code>-file from your <code>js/</code> folder, and add the following code.
+Feel free to copy/paste it, so you get to keep my comments, they explain what each part does.</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// Here we create our game object, with a width of 800 pixels </span>
+<span class="hljs-comment">// and a height of 600, Phaser.AUTO is us telling it to </span>
+<span class="hljs-comment">// automatically choose the correct render engine (canvas or webgl).</span>
+<span class="hljs-comment">// 'content' is the id of the parent html element we want to </span>
+<span class="hljs-comment">// target.</span>
+<span class="hljs-keyword">var</span> game = <span class="hljs-keyword">new</span> Phaser.Game(<span class="hljs-number">800</span>, <span class="hljs-number">600</span>, Phaser.AUTO, <span class="hljs-string">'content'</span>, {
+    <span class="hljs-comment">// This tells Phaser that for preload, use our own function </span>
+    <span class="hljs-comment">// for it.</span>
+    preload: preload,
+    <span class="hljs-comment">// Same goes for the create function.</span>
+    create: create,
+    <span class="hljs-comment">// ... and the update function.</span>
+    update: update
+});
+
+<span class="hljs-comment">// This will be called when the game first starts, allowing you </span>
+<span class="hljs-comment">// to preload assets and set up important global variables before </span>
+<span class="hljs-comment">// the actual game logic begins.</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">preload</span>(<span class="hljs-params"></span>) </span>{}
+
+<span class="hljs-comment">// This is called right after the preload, and creates the actual</span>
+<span class="hljs-comment">// game, here you can use the things you added in preload to create</span>
+<span class="hljs-comment">// your game!</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">create</span>(<span class="hljs-params"></span>) </span>{}
+
+<span class="hljs-comment">// The very important update function, it is called every frame.</span>
+<span class="hljs-comment">// There is of course always the problem that slow browsers will</span>
+<span class="hljs-comment">// call it less often, but most modern browsers will run it just</span>
+<span class="hljs-comment">// fine.</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">update</span>(<span class="hljs-params"></span>) </span>{}
+</div></code></pre>
+<p>This itself does nothing, as the game contains no actual &quot;stuff&quot; for us to display and debug against, so let's add that.</p>
+<p>Download the following image: <a href="https://cdn.discordapp.com/icons/172773076881113090/f9ee342ca79fbaef5a869dfe7d8803cd.png">[LINK]</a></p>
+<p><img src="c:/Projects/Personal/phaser-tutorial/assets/ggc.png" alt="GGC Logo"></p>
+<p>I suggest renaming the file, in my case I renamed it to <code>ggc.png</code> and put it into the <code>assets/</code> folder, I highly recommend you do the same, so you can more easily follow along.<br>
+Let's add the image to our game. First we need to preload it, to make sure it is loaded into memory so we can render it later.
+Add the following code inside the <code>game.js</code>'s <code>preload()</code> function:</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// Here we load the image into the game objects memory, and</span>
+<span class="hljs-comment">// assign it the key 'logo' for future reference.</span>
+game.load.image(<span class="hljs-string">'logo'</span>, <span class="hljs-string">'assets/ggc.png'</span>);
+<span class="hljs-comment">// Here we simply assign the background color to the game</span>
+<span class="hljs-comment">// stage, to make to fit nicely with our logo.</span>
+<span class="hljs-comment">// Note: you can also use other ways to set color as noted below.</span>
+game.stage.backgroundColor = <span class="hljs-string">"#533D91"</span>;
+<span class="hljs-comment">// game.stage.backgroundColor = 0x533d91;</span>
+<span class="hljs-comment">// game.stage.backgroundColor = 'rgb(84, 61, 154)';</span>
+<span class="hljs-comment">// game.stage.backgroundColor = 'rgba(84, 61, 154, 1.0)';</span>
+</div></code></pre>
+<p>As you can see from the code, I also define the stage's background color, this is simply to make it look prettier. You can use Intellisense to look through what else you can define for the game object.<br>
+Now we also need to actually <em>render</em> the image, so lets do that by adding the following code to the <code>game.js</code>'s <em>create()</em> function:</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// Now we add our logo that was preloaded, as a sprite to </span>
+<span class="hljs-comment">// the game itself, we want it to be centered on the X and Y </span>
+<span class="hljs-comment">// of the gameworld, and we reference the key that we </span>
+<span class="hljs-comment">// defined during preload of the logo.</span>
+<span class="hljs-keyword">var</span> logo = game.add.sprite(game.world.centerX, game.world.centerY, <span class="hljs-string">'logo'</span>);
+<span class="hljs-comment">// While we already told the logo to be centered in our game</span>
+<span class="hljs-comment">// world, that is only relative to it's own achor point, </span>
+<span class="hljs-comment">// This way to tell the logo that it's anchor point is in </span>
+<span class="hljs-comment">// the center of itself.</span>
+logo.anchor.setTo(<span class="hljs-number">0.5</span>, <span class="hljs-number">0.5</span>);
+</div></code></pre>
+<blockquote>
+<p>I highly suggest reading all the comments to get a better idea of what the code is doing.</p>
+</blockquote>
+<h2 id="6-cross-origin-referencing">6. <a name='Cross-OriginReferencing'></a>Cross-Origin Referencing</h2>
+<p>If you view the <code>index.html</code> in your browser now, you should be greeted by a big purple rectangle... but no image.<br>
+This is because of something called <em>cross-origin referencing</em>. My explanation here will not be very thorough, if you want a much more detailed explanation, there are plenty resources on the subject to find online.<br>
+<em>Cross-origin referencing</em> happens when a website uses one protocol, in our case <code>file:\\\</code>, while some parts of it uses another protocol, in our case javascript tries to use the <code>http://</code> protocol.</p>
+<p>Modern browsers tend to block references from a different origin than the source document for security reasons, for all it knows, it could be some virus/malware that is trying to inject malicious code into your website.<br>
+Some browsers, like Firefox, recognizes that we are viewing a local file, and does not block it, even though it would if it was a real website, so do not be alarmed if you use Firefox and it works fine.</p>
+<blockquote>
+<p>That being said, make sure to understand how your browser handles cross-origin referencing, if your browser doesn't handle it, or handles it badly, I highly recommend switching to a more secure browser.</p>
+</blockquote>
+<p>When viewing the page, if we open the developer tools (in most browsers this is done by hitting F12), and go to it's <em>Console</em> tab, we can see the error we are getting, specifically mentioning cross-origin.</p>
+<p>In the next chapter we will install a small, simple, local server that will help us view the website properly without getting any cross-origin errors.</p>
+<h2 id="7-webserver">7. <a name='Webserver'></a>Webserver</h2>
+<p>In order to avoid the whole <em>cross-origin</em> problem, regardless of which browser you use, we will run a small server to host the files via a <code>http://</code> protocol, the same as the javascript does.<br>
+If you have a server, and know how to use it for this, then you can skip this chapter.</p>
+<h3 id="71-prerequisites">7.1. <a name='Prerequisites-1'></a>Prerequisites</h3>
+<p>We need some additional software installed, in order to get the server going.</p>
+<ol>
+<li>
+<p>In VSCode, open the Integrated Terminal <strong>[View➞Integrated Terminal]</strong> and type <code>node -v</code>. This should return a version number, something like <code>v6.10.0</code> and is the version number of Node.js, indicating that it is recognized by VSCode and properly installed.</p>
+</li>
+<li>
+<p>Install the no-nonsense server, called <a href="https://github.com/indexzero/http-server">HTTP-Server</a>, by running the following command in the Integrated Terminal: <code>npm install http-server</code>, it will run for a bit and is done when you can type in the terminal again. It is a simple server that requires zero configuration and is run via our integrated terminal.</p>
+</li>
+<li>
+<p>Again, in the Integrated Terminal, type the following command to start the server: <code>.\node_modules\.bin\http-server -s</code></p>
+<ul>
+<li><em>We tell it the path to the installed http-server command, which is why it starts with a long path string</em>.</li>
+<li><em>the -s means silent, as we don't need the message spam, but you are welcome to not use it, if you want to see the spam</em>.</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p><strong>IMPORTANT:</strong> The server does not shut down itself, it is too simple for that, to shut it down once you're done using it, make sure the Integrated Terminal is selected and has focus and hit <em>CTRL+C</em>. You will know that is has properly shut down if you are allowed to type in the terminal again.</p>
+</blockquote>
+<p>You should now be able to open your browser and go to <a href="http://localhost:8080">http://localhost:8080</a> to view your index.html, this time with the image properly displayed, and no cross-origin error in the Developer Tools Console.<br>
+You will have to start and shut down the server every time you want to correctly run the code, but you do not have to stop/start between you saving files, if the server is running, simply reload the browser page for the changes to update.</p>
+<h3 id="72-keybinding-the-server-command">7.2. <a name='Keybindingtheservercommand'></a>Keybinding the server command</h3>
+<p>It can get annoying having to remember, type or copy/paste the command for starting the server every time you want to start working with your project.<br>
+So let's make a keybinding for it.</p>
+<blockquote>
+<p>VSCode sadly does not support us adding a keybinding directly to a terminal command, instead we will create a task that runs the command and then keybind that.</p>
+</blockquote>
+<ol>
+<li>Open your <strong>Command Palette</strong> by hitting <em>CTRL+SHIFT+P</em>, <em>F1</em>, or finding it under <strong>[View➞Command Palette...]</strong>.</li>
+<li>Type <code>task</code> into it, and select the option called <strong>Tasks: Configure Task Runner</strong>.</li>
+<li>In the menu that asks you to select a task runner, choose <strong>Other</strong>, as we just want a very basic command executed, nothing special.</li>
+</ol>
+<p>You should now have a new file in your <code>.vscode/</code> folder, called <code>tasks.json</code>, which is likely already opened for you.<br>
+Replace the content of the file with the following code:</p>
+<pre class="hljs"><code><div>{
+    // See https://go.microsoft.com/fwlink/?LinkId=<span class="hljs-number">733558</span>
+    // for the documentation about the tasks.json format
+    <span class="hljs-string">"version"</span>: <span class="hljs-string">"0.1.0"</span>,
+    <span class="hljs-attr">"tasks"</span>: [
+        {
+            <span class="hljs-attr">"taskName"</span>: <span class="hljs-string">"runServer"</span>,
+            <span class="hljs-attr">"command"</span>: <span class="hljs-string">".\\node_modules\\.bin\\http-server"</span>,
+            <span class="hljs-attr">"isShellCommand"</span>: <span class="hljs-literal">true</span>,
+            <span class="hljs-attr">"showOutput"</span>: <span class="hljs-string">"always"</span>,
+            <span class="hljs-attr">"promptOnClose"</span>: <span class="hljs-literal">true</span>,
+            <span class="hljs-attr">"isBackground"</span>: <span class="hljs-literal">true</span>
+        }
+    ]
+}
+</div></code></pre>
+<p>This code tells VSCode that we have a task named <em>runServer</em> that runs our command <code>.\node_modules\.bin\http-server</code> as a shell command, in the background. It is also told that it should prompt us if the task is running when we close VSCode, and to always show the output.</p>
+<blockquote>
+<p>The <code>&quot;promptOnClose&quot;: true,</code> line is especially useful, it will prevent you from closing VSCode if it has a task running, instead you will be asked if you want to terminate the task and then close VSCode.<br>
+This will prevent the server from running when not using VSCode.</p>
+</blockquote>
+<h4 id="721-no-longer-silent">7.2.1. <a name='No-longersilent'></a>No-longer silent</h4>
+<p>We do not pass the <code>-s</code> argument with the task's command, this is because task output it sent to the <strong>Output</strong> tab <em>not</em> the <strong>Terminal</strong> tab, meaning we can still use the terminal without huge amounts of spam, as well as we have access to the output if we need it.</p>
+<h4 id="722-shutting-down-the-server">7.2.2. <a name='Shuttingdowntheserver'></a>Shutting down the server</h4>
+<p>When run as a task, we can no-longer shut it down with <em>CTRL+C</em>, instead we have to tell VSCode to terminate the task.<br>
+Here is how you do that:</p>
+<ol>
+<li>Open your <strong>Command Palette</strong>, as explained previously.</li>
+<li>Type in <code>Terminate</code>, you can probably stop before typing the full word.</li>
+<li>Select the option called <strong>Tasks: Terminate Running Task</strong>, this will shut down the server.</li>
+</ol>
+<h4 id="723-keybinding-it-all">7.2.3. <a name='Keybindingitall'></a>Keybinding it all</h4>
+<p>Having a task available doesn't really save us much time if we have to launch it through the command palette, we want to be able to hit a combination of keys to have it run the task.</p>
+<ol>
+<li>Select <strong>[File➞Preferences➞Keyboard Shortcuts]</strong>.</li>
+<li>Click the link <strong>keybindings.json</strong>, right below the search bar in the window that opens, this will let you customize your keybindings.</li>
+<li>Click the <strong>Define Keybinding</strong> button, followed by the key combination you want to use for launching the server. I suggest using <em>CTRL+ALT+S</em> (S for Server), hit <em>[ENTER]</em> as told by the input window.</li>
+<li>It has now added our keybinding to the window with the blue button, but we need to tell it our command.
+<ul>
+<li>change where it says <code>&quot;commandId&quot;</code> to <code>&quot;workbench.action.tasks.runTask&quot;</code>.</li>
+<li>replace the line where it says <code>&quot;when&quot;: &quot;editorTextFocus&quot;</code> with this: <code>&quot;args&quot;: &quot;runServer&quot;</code>.</li>
+</ul>
+</li>
+<li>When you save the file, your keybinding should then work.</li>
+</ol>
+<p>Let's also create a keybinding for terminating the running task, just to make our lives easier.</p>
+<ol>
+<li>In the keybinding window with the blue <strong>Define Keybinding</strong> button, click it and give it the key combination you want to terminate the running task. I suggest using <em>CTRL+ALT+X</em>, hit <em>[ENTER]</em> as told by the input window.</li>
+<li>Replace the <code>&quot;commandId&quot;</code> with <code>&quot;workbench.action.tasks.terminate&quot;</code>.</li>
+<li>Remove the comma <code>,</code> from the end of the line where we just added the command.</li>
+<li>Remove the line where it says <code>&quot;when&quot;: &quot;editorTextFocus&quot;</code>, as we do not need it.</li>
+</ol>
+<p>We now have keybindings for both starting the <code>runServer</code> task, as well as one for terminating the currently running task.<br>
+This will make life a lot easier when it comes to starting the project again after having it closed.</p>
+<h2 id="8-disabling-caching">8. <a name='DisablingCaching'></a>Disabling Caching</h2>
+<p>To avoid a lot of potential headaches, we want to make sure that the browser doesn't cache, this is not a 100% fool-proof solution, as browsers update and sometimes change how they approach content caching.</p>
+<p>I highly suggest not to disable caching on any code that is considered <em>live</em>, as-in, used on websites that are in use, as this can worsen the experience of the visitors. This chapter is purely to make <em>developing</em> easier.</p>
+<blockquote>
+<p>Caching is a practice used by browsers to locally save website content, such as images, css and sometimes also javascript, so that when you visit that website again, it will load faster.<br>
+Most websites tell browsers when they should cache the website again, allowing websites to serve new content quickly while still keeping the speed benefits of caching.</p>
+</blockquote>
+<p>For now, add the following HTML-code to your index.html, right before the <code>&lt;title&gt;</code>-tag.</p>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">"cache-control"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"max-age=0"</span> /&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">"cache-control"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"no-cache, no-store, must-revalidate"</span>/&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">"expires"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"0"</span> /&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">"expires"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"Tue, 01 Jan 1980 1:00:00 GMT"</span> /&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">"pragma"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"no-cache"</span> /&gt;</span>
+</div></code></pre>
+<p>It should now look something like this:<br>
+<em>(the <code>...</code> are just there to illustrate that there are more unchanged html before and after the code snippet)</em></p>
+<pre class="hljs"><code><div>...
+<span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"UTF-8"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"viewport"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"width=device-width, initial-scale=1.0"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">"X-UA-Compatible"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"ie=edge"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">"cache-control"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"max-age=0"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">"cache-control"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"no-cache, no-store, must-revalidate"</span>/&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">"expires"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"0"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">"expires"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"Tue, 01 Jan 1980 1:00:00 GMT"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">"pragma"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"no-cache"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Phaser Test<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+...
+</div></code></pre>
+<h2 id="9-debugging-phaser">9. <a name='DebuggingPhaser'></a>Debugging Phaser</h2>
+<p>In order to help you develop games with Phaser, knowing how to debug your code is crucial, this chapter will explain 2 key parts of debugging; breakpoints and sending debug console log messages.</p>
+<p>There are multiple extensions that allow for debugging in different browsers, we will focus on Google Chrome, as it is the most commonly used browser.</p>
+<blockquote>
+<p>If you want to debug in Firefox, search for the extension called <em>Debugger for Firefox</em>, it also has sample code to get you started.</p>
+</blockquote>
+<h3 id="91-debugging-in-google-chrome">9.1. <a name='DebugginginGoogleChrome'></a>Debugging in Google Chrome</h3>
+<p>If you want to debug your code properly in Google Chrome, here we will explain what VSCode Extension to install and how to configure it so that debugging will work for you.</p>
+<ol>
+<li>
+<p>Click the icon for the <strong>Extension Manager</strong> in the <strong>Activity Bar</strong> in VSCode.</p>
+</li>
+<li>
+<p>In the search field at the top of the <strong>Side Bar</strong> search for <code>Debugger for Chrome</code>.</p>
+</li>
+<li>
+<p>Click the green <strong>Install</strong> button, once the button changes into a blue <strong>Reload</strong> button, the install has completed and you need to click the <strong>Reload</strong> button in order to reload VSCode and properly load the extension.</p>
+</li>
+<li>
+<p>Open your <code>index.html</code> and hit <strong>F5</strong>, this should bring up a menu asking you to select an environment, this is VSCode's debugger that needs to know what kind of debugging environment it is dealing with. You should see an option for <code>chrome</code>, choose that.</p>
+</li>
+<li>
+<p>This should auto generate a <code>.vscode/</code> folder and inside it, a <code>launch.json</code> file, which it should also have opened. In case that didn't happen, you can create the folder and file yourself, the content of the file is as follows:</p>
+</li>
+</ol>
+<pre class="hljs"><code><div>{
+    <span class="hljs-attr">"version"</span>: <span class="hljs-string">"0.2.0"</span>,
+    <span class="hljs-attr">"configurations"</span>: [
+        {
+            <span class="hljs-attr">"type"</span>: <span class="hljs-string">"chrome"</span>,
+            <span class="hljs-attr">"request"</span>: <span class="hljs-string">"launch"</span>,
+            <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Launch Chrome against localhost"</span>,
+            <span class="hljs-attr">"url"</span>: <span class="hljs-string">"http://localhost:8080"</span>,
+            <span class="hljs-attr">"webRoot"</span>: <span class="hljs-string">"${workspaceRoot}"</span>,
+            <span class="hljs-attr">"disableNetworkCache"</span>: <span class="hljs-literal">true</span>,
+            <span class="hljs-attr">"runtimeArgs"</span>: [ <span class="hljs-string">"--disk-cache-size=1"</span> ]
+        },
+        {
+            <span class="hljs-attr">"type"</span>: <span class="hljs-string">"chrome"</span>,
+            <span class="hljs-attr">"request"</span>: <span class="hljs-string">"attach"</span>,
+            <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Attach to Chrome"</span>,
+            <span class="hljs-attr">"port"</span>: <span class="hljs-number">9222</span>,
+            <span class="hljs-attr">"webRoot"</span>: <span class="hljs-string">"${workspaceRoot}"</span>,
+            <span class="hljs-attr">"disableNetworkCache"</span>: <span class="hljs-literal">true</span>
+        }
+    ]
+}
+</div></code></pre>
+<blockquote>
+<p><strong>NOTE:</strong> Comments were removed from the previous code-block to prevent it from breaking the PDF layout, feel free to ask me if you have any questions about it.*</p>
+</blockquote>
+<ol start="6">
+<li>
+<p>Now VSCode knows what to do when you hit F5, it will launch Google Chrome with the address of <code>http://localhost:8080</code>, which just so happens to be the same address we can find our code at, when running the local server, perfect!</p>
+</li>
+<li>
+<p>When you have the local server running, you can now hit F5 to launch Google Chrome for debugging (and VSCode will display a debugging toolbar at the very top)</p>
+</li>
+</ol>
+<blockquote>
+<p><strong>IMPORTANT:</strong> If you have Google Chrome running, either in the background or some other way, then debugging will be unable to connect to it, as it can only enable remote debugging on a clean browser start.<br>
+In those cases, make sure all Google Chrome windows/tabs are closed, and it isn't running in the background, then you can hit F5 and the debugger will connect properly.<br>
+This might change in future updates of the Chrome Debugger.</p>
+</blockquote>
+<h3 id="92-breakpoints">9.2. <a name='Breakpoints'></a>Breakpoints</h3>
+<p>Breakpoints is a way to tell the debugger to stop execution of our code, at the point we specify. In VSCode you specify a breakpoint the same was as in many other programming tools, by clicking in the left margin that also has the line numbers. A red dot appears when a breakpoint has been set, and it can be removed by clicking it again.</p>
+<p><img src="c:/Projects/Personal/phaser-tutorial/assets/breakpoint.png" alt="Breakpoint Example"></p>
+<blockquote>
+<p>For the more advanced needs, you can right-click the breakpoint and make a conditional breakpoint instead, such as one that only triggers when certain conditions are met.</p>
+</blockquote>
+<p>When the debugger is running properly, and it encounters a breakpoint, it will stop executing your code from that point on, and you will be shown the line it breaks at, inside VSCode. This tells you that your code was reached, so it is useful for checking if your code is reachable.</p>
+<p>When a breakpoint is hit, you can hit F5 again to let the debugger continue until it encounters another (or the same) breakpoint again.</p>
+<h3 id="93-sending-messages-to-the-debug-console">9.3. <a name='Sendingmessagestothedebugconsole.'></a>Sending messages to the debug console.</h3>
+<p>Sometimes you want to output some test information, maybe a calculated value or something similar, being able to output that to VSCode's debug console (can be seen as the tab right next to <strong>terminal</strong> when you have the Integrated Terminal open).<br>
+Let's see if we can output a message to the console, that tells us the width and height of the image we used.</p>
+<p>Add the following to your <code>game.js</code>'s <code>create()</code> function, I suggest somewhere <strong>after</strong> we define the <code>logo</code> variable.</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// Send message to debug console with the logo width</span>
+<span class="hljs-comment">// Width and height should both be 128</span>
+<span class="hljs-built_in">console</span>.debug(<span class="hljs-string">"Logo Width:"</span>.concat(logo.width));
+<span class="hljs-built_in">console</span>.debug(<span class="hljs-string">"Logo Height:"</span>.concat(logo.height));
+</div></code></pre>
+<p>If you save the file, make sure the server is running, and then enable debugging by hitting F5, it should now display in the debug console (both in VSCode and the browsers own Developer Tools Console).
+It should look something like this:</p>
+<p><img src="c:/Projects/Personal/phaser-tutorial/assets/debugConsole.png" alt="Debug Console Output"></p>
+<p>You can now output messages to the console, enjoy being able to debug more abstract data.</p>
+<h2 id="10-typos-errors-etc">10. <a name='TyposErrorsetc.'></a>Typos, Errors, etc.</h2>
+<p>If you find any typos or errors in this tutorial, or you are simply stuck. You can reach me on <a href="https://discordapp.com">Discord</a> as <code>Graloth#6217</code> or via email on <a href="mailto:dion@graloth.com">dion@graloth.com</a>.</p>
+<h3 id="101-bonus-stuff">10.1. <a name='Bonusstuff'></a>Bonus stuff</h3>
+<p>If you like VSCode as much as me, you might want to customize it a bit, to make it fit you better. I would then suggest looking at the following links.</p>
+<ul>
+<li><a href="https://github.com/tonsky/FiraCode">(Font) Fira Code</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=idleberg.hopscotch">(Theme) Hopscotch</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=spywhere.guides">(Extension) Guides</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=be5invis.vscode-icontheme-nomo-dark">(Icon Theme) Nomo Dark Icon</a></li>
+</ul>
+<p>If you want to browse all the available extensions, themes, icon themes, debuggers, etc. etc., have a look at the <a href="https://marketplace.visualstudio.com/vscode">Extension Marketplace for Visual Studio Code</a>.</p>
+
+        </article>
+    </body>
+</html>
