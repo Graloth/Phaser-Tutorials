@@ -2,8 +2,6 @@
 This is the first in a tutorial series that aims to help you get started with the Phaser game framework.  
 In this first tutorial, we will focus on getting your development environment installed and properly configured.
 
-> None of these tutorials should be considered a *complete* guide to Phaser, they only server the purpose to get you going.
-
 <!-- vscode-markdown-toc -->
 * 1. [Prerequisites](#Prerequisites)
 * 2. [Visual Studio Code](#VisualStudioCode)
