@@ -519,357 +519,6 @@ blockquote {
 }
 
 code {
-	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
-	font-size: 14px;
-	line-height: 19px;
-}
-
-body.wordWrap pre {
-	white-space: pre-wrap;
-}
-
-.mac code {
-	font-size: 12px;
-	line-height: 18px;
-}
-
-pre:not(.hljs),
-pre.hljs code > div {
-	padding: 16px;
-	border-radius: 3px;
-	overflow: auto;
-}
-
-/** Theming */
-
-.vscode-light,
-.vscode-light pre code {
-	color: rgb(30, 30, 30);
-}
-
-.vscode-dark,
-.vscode-dark pre code {
-	color: #333;
-}
-
-.vscode-high-contrast,
-.vscode-high-contrast pre code {
-	color: white;
-}
-
-.vscode-light code {
-	color: #A31515;
-}
-
-.vscode-dark code {
-	color: #D7BA7D;
-}
-
-.vscode-light pre:not(.hljs),
-.vscode-light code > div {
-	background-color: rgba(220, 220, 220, 0.4);
-}
-
-.vscode-dark pre:not(.hljs),
-.vscode-dark code > div {
-	background-color: rgba(10, 10, 10, 0.4);
-}
-
-.vscode-high-contrast pre:not(.hljs),
-.vscode-high-contrast code > div {
-	background-color: rgb(0, 0, 0);
-}
-
-.vscode-high-contrast h1 {
-	border-color: rgb(0, 0, 0);
-}
-
-.vscode-light table > thead > tr > th {
-	border-color: rgba(0, 0, 0, 0.69);
-}
-
-.vscode-dark table > thead > tr > th {
-	border-color: rgba(255, 255, 255, 0.69);
-}
-
-.vscode-light h1,
-.vscode-light hr,
-.vscode-light table > tbody > tr + tr > td {
-	border-color: rgba(0, 0, 0, 0.18);
-}
-
-.vscode-dark h1,
-.vscode-dark hr,
-.vscode-dark table > tbody > tr + tr > td {
-	border-color: rgba(255, 255, 255, 0.18);
-}
-
-.vscode-light blockquote,
-.vscode-dark blockquote {
-	background: rgba(127, 127, 127, 0.1);
-	border-color: rgba(0, 122, 204, 0.5);
-}
-
-.vscode-high-contrast blockquote {
-	background: transparent;
-	border-color: #fff;
-}
-/* Tomorrow Theme */
-/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
-/* Original theme - https://github.com/chriskempson/tomorrow-theme */
-
-/* Tomorrow Comment */
-.hljs-comment,
-.hljs-quote {
-	color: #8e908c;
-}
-
-/* Tomorrow Red */
-.hljs-variable,
-.hljs-template-variable,
-.hljs-tag,
-.hljs-name,
-.hljs-selector-id,
-.hljs-selector-class,
-.hljs-regexp,
-.hljs-deletion {
-	color: #c82829;
-}
-
-/* Tomorrow Orange */
-.hljs-number,
-.hljs-built_in,
-.hljs-builtin-name,
-.hljs-literal,
-.hljs-type,
-.hljs-params,
-.hljs-meta,
-.hljs-link {
-	color: #f5871f;
-}
-
-/* Tomorrow Yellow */
-.hljs-attribute {
-	color: #eab700;
-}
-
-/* Tomorrow Green */
-.hljs-string,
-.hljs-symbol,
-.hljs-bullet,
-.hljs-addition {
-	color: #718c00;
-}
-
-/* Tomorrow Blue */
-.hljs-title,
-.hljs-section {
-	color: #4271ae;
-}
-
-/* Tomorrow Purple */
-.hljs-keyword,
-.hljs-selector-tag {
-	color: #8959a8;
-}
-
-.hljs {
-	display: block;
-	overflow-x: auto;
-	color: #4d4d4c;
-	padding: 0.5em;
-}
-
-.hljs-emphasis {
-	font-style: italic;
-}
-
-.hljs-strong {
-	font-weight: bold;
-}
-body
-{
-    background-color: white;
-}
-.emoji
-{
-    height: 20px;
-}
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
-
-body {
-	font-family: "Fira Code" , "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
-	font-size: 14px;
-	padding: 0 26px;
-	line-height: 1.5em;
-	word-wrap: break-word;
-}
-
-#code-csp-warning {
-	position: fixed;
-	top: 0;
-	right: 0;
-	color: white;
-	margin: 16px;
-	text-align: center;
-	font-size: 12px;
-	font-family: sans-serif;
-	background-color:#444444;
-	cursor: pointer;
-	padding: 6px;
-	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
-}
-
-#code-csp-warning:hover {
-	text-decoration: none;
-	background-color:#007acc;
-	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
-}
-
-
-body.scrollBeyondLastLine {
-	margin-bottom: calc(100vh - 22px);
-}
-
-body.showEditorSelection .code-line {
-	position: relative;
-}
-
-body.showEditorSelection .code-active-line:before,
-body.showEditorSelection .code-line:hover:before {
-	content: "";
-	display: block;
-	position: absolute;
-	top: 0;
-	left: -12px;
-	height: 100%;
-}
-
-body.showEditorSelection li.code-active-line:before,
-body.showEditorSelection li.code-line:hover:before {
-	left: -30px;
-}
-
-.vscode-light.showEditorSelection .code-active-line:before {
-	border-left: 3px solid rgba(0, 0, 0, 0.15);
-}
-
-.vscode-light.showEditorSelection .code-line:hover:before {
-	border-left: 3px solid rgba(0, 0, 0, 0.40);
-}
-
-.vscode-light.showEditorSelection .code-line .code-line:hover:before {
-	border-left: none;
-}
-
-.vscode-dark.showEditorSelection .code-active-line:before {
-	border-left: 3px solid rgba(255, 255, 255, 0.4);
-}
-
-.vscode-dark.showEditorSelection .code-line:hover:before {
-	border-left: 3px solid rgba(255, 255, 255, 0.60);
-}
-
-.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
-	border-left: none;
-}
-
-.vscode-high-contrast.showEditorSelection .code-active-line:before {
-	border-left: 3px solid rgba(255, 160, 0, 0.7);
-}
-
-.vscode-high-contrast.showEditorSelection .code-line:hover:before {
-	border-left: 3px solid rgba(255, 160, 0, 1);
-}
-
-.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
-	border-left: none;
-}
-
-img {
-	max-width: 100%;
-	max-height: 100%;
-}
-
-a {
-	color: #4080D0;
-	text-decoration: none;
-}
-
-a:focus,
-input:focus,
-select:focus,
-textarea:focus {
-	outline: 1px solid -webkit-focus-ring-color;
-	outline-offset: -1px;
-}
-
-hr {
-	border: 0;
-	height: 2px;
-	border-bottom: 2px solid;
-}
-
-h1 {
-	padding-bottom: 0.3em;
-	line-height: 1.2;
-	border-bottom-width: 1px;
-	border-bottom-style: solid;
-}
-
-h2 {
-	page-break-before: always;
-}
-
-h1, h2, h3 {
-	font-weight: normal;
-}
-
-h1 code,
-h2 code,
-h3 code,
-h4 code,
-h5 code,
-h6 code {
-	font-size: inherit;
-	line-height: auto;
-}
-
-a:hover {
-	color: #4080D0;
-	text-decoration: underline;
-}
-
-table {
-	border-collapse: collapse;
-}
-
-table > thead > tr > th {
-	text-align: left;
-	border-bottom: 1px solid;
-}
-
-table > thead > tr > th,
-table > thead > tr > td,
-table > tbody > tr > th,
-table > tbody > tr > td {
-	padding: 5px 10px;
-}
-
-table > tbody > tr + tr > td {
-	border-top: 1px solid;
-}
-
-blockquote {
-	margin: 0 7px 0 5px;
-	padding: 0 16px 0 10px;
-	border-left: 5px solid;
-}
-
-code {
 	font-family: "Fira Code", Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
 	font-size: 14px;
 	line-height: 19px;
@@ -900,7 +549,7 @@ pre.hljs code > div {
 
 .vscode-dark,
 .vscode-dark pre code {
-	color: #DDD;
+	color: #eee;
 }
 
 .vscode-high-contrast,
@@ -1038,36 +687,9 @@ pre.hljs code > div {
 .hljs-strong {
 	font-weight: bold;
 }
-body
-{
-    background-color: #333;
-}
 .emoji
 {
     height: 20px;
-}
-ul, ul li {
-    list-style: none;
-}
-ul {
-    -webkit-margin-before: 0;
-    -webkit-margin-after: 0;
-    -webkit-margin-start: 0;
-    -webkit-margin-end: 0;
-    -webkit-padding-start: 0;
-}
-ol {
-    -webkit-padding-start: 20px;
-}
-li ul {
-    -webkit-margin-before: 0;
-    -webkit-margin-after: 0;
-    -webkit-margin-start: 0;
-    -webkit-margin-end: 0;
-    -webkit-padding-start: 40px;
-}
-ol li {
-    list-style-type: decimal;
 }
 ul, ul li {
     list-style: none;
@@ -1223,13 +845,13 @@ In order to make your life a while lot easier, make sure the following options a
 <p>It is a good idea to get familiar with some of the areas of VSCode, as I will refer to these names throughout the tutorial. If you want a full list of tips and tricks for VSCode, you can look here: <a href="https://github.com/Microsoft/vscode-tips-and-tricks">Collection of helpful tips and tricks for VSCode</a></p>
 <h4 id="221-interface">2.2.1. <a name='Interface'></a>Interface</h4>
 <p>You can find a full description of all the interface features here: <a href="https://code.visualstudio.com/docs/getstarted/userinterface">[LINK]</a>, but I will primarily reference what is shown in this image.</p>
-<p><img src="https://graloth.github.io/Phaser-Tutorials/assets/panelNames.png" alt="Visual Studio Code Interface"></p>
+<p><img src="assets/panelNames.png" alt="Visual Studio Code Interface"></p>
 <h4 id="222-activity-bar-icons">2.2.2. <a name='ActivityBarIcons'></a>Activity Bar Icons</h4>
 <p>These icons represent the main/primary functionalities of VSCode, and as such you will likely be referring to them quite often.</p>
-<p><img src="https://graloth.github.io/Phaser-Tutorials/assets/iconNames.png" alt="Activity Bar Icons"></p>
+<p><img src="assets/iconNames.png" alt="Activity Bar Icons"></p>
 <h4 id="223-integrated-terminal">2.2.3. <a name='IntegratedTerminal'></a>Integrated Terminal</h4>
 <p>We will also use the integrated terminal, which you can show by going to <strong>[View➞Integrated Terminal]</strong> (this will also tell you the keyboard shortcut for it, right next to it).</p>
-<p><img src="https://graloth.github.io/Phaser-Tutorials/assets/terminal.png" alt="Integrated Terminal"></p>
+<p><img src="assets/terminal.png" alt="Integrated Terminal"></p>
 <h2 id="3-initial-setup">3. <a name='InitialSetup'></a>Initial Setup</h2>
 <p>We need to get our project set up so that we can begin.</p>
 <blockquote>
@@ -1341,7 +963,7 @@ Feel free to copy/paste it, so you get to keep my comments, they explain what ea
 </div></code></pre>
 <p>This itself does nothing, as the game contains no actual &quot;stuff&quot; for us to display and debug against, so let's add that.</p>
 <p>Download the following image: <a href="https://cdn.discordapp.com/icons/172773076881113090/f9ee342ca79fbaef5a869dfe7d8803cd.png">[LINK]</a></p>
-<p><img src="https://graloth.github.io/Phaser-Tutorials/assets/ggc.png" alt="GGC Logo"></p>
+<p><img src="assets/ggc.png" alt="GGC Logo"></p>
 <p>I suggest renaming the file, in my case I renamed it to <code>ggc.png</code> and put it into the <code>assets/</code> folder, I highly recommend you do the same, so you can more easily follow along.<br>
 Let's add the image to our game. First we need to preload it, to make sure it is loaded into memory so we can render it later.
 Add the following code inside the <code>game.js</code>'s <code>preload()</code> function:</p>
@@ -1571,7 +1193,7 @@ This might change in future updates of the Chrome Debugger.</p>
 </blockquote>
 <h3 id="92-breakpoints">9.2. <a name='Breakpoints'></a>Breakpoints</h3>
 <p>Breakpoints is a way to tell the debugger to stop execution of our code, at the point we specify. In VSCode you specify a breakpoint the same was as in many other programming tools, by clicking in the left margin that also has the line numbers. A red dot appears when a breakpoint has been set, and it can be removed by clicking it again.</p>
-<p><img src="https://graloth.github.io/Phaser-Tutorials/assets/breakpoint.png" alt="Breakpoint Example"></p>
+<p><img src="assets/breakpoint.png" alt="Breakpoint Example"></p>
 <blockquote>
 <p>For the more advanced needs, you can right-click the breakpoint and make a conditional breakpoint instead, such as one that only triggers when certain conditions are met.</p>
 </blockquote>
@@ -1588,7 +1210,7 @@ Let's see if we can output a message to the console, that tells us the width and
 </div></code></pre>
 <p>If you save the file, make sure the server is running, and then enable debugging by hitting F5, it should now display in the debug console (both in VSCode and the browsers own Developer Tools Console).
 It should look something like this:</p>
-<p><img src="https://graloth.github.io/Phaser-Tutorials/assets/debugConsole.png" alt="Debug Console Output"></p>
+<p><img src="assets/debugConsole.png" alt="Debug Console Output"></p>
 <p>You can now output messages to the console, enjoy being able to debug more abstract data.</p>
 <h2 id="10-typos-errors-etc">10. <a name='TyposErrorsetc.'></a>Typos, Errors, etc.</h2>
 <p>If you find any typos or errors in this tutorial, or you are simply stuck. You can reach me on <a href="https://discordapp.com">Discord</a> as <code>Graloth#6217</code> or via email on <a href="mailto:dion@graloth.com">dion@graloth.com</a>.</p>

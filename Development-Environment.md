@@ -72,17 +72,17 @@ It is a good idea to get familiar with some of the areas of VSCode, as I will re
 ####  2.2.1. <a name='Interface'></a>Interface
 You can find a full description of all the interface features here: [[LINK]](https://code.visualstudio.com/docs/getstarted/userinterface), but I will primarily reference what is shown in this image.
 
-![Visual Studio Code Interface](https://graloth.github.io/Phaser-Tutorials/assets/panelNames.png)
+![Visual Studio Code Interface](assets/panelNames.png)
 
 ####  2.2.2. <a name='ActivityBarIcons'></a>Activity Bar Icons
 These icons represent the main/primary functionalities of VSCode, and as such you will likely be referring to them quite often.
 
-![Activity Bar Icons](https://graloth.github.io/Phaser-Tutorials/assets/iconNames.png)
+![Activity Bar Icons](assets/iconNames.png)
 
 ####  2.2.3. <a name='IntegratedTerminal'></a>Integrated Terminal
 We will also use the integrated terminal, which you can show by going to **[View➞Integrated Terminal]** (this will also tell you the keyboard shortcut for it, right next to it).
 
-![Integrated Terminal](https://graloth.github.io/Phaser-Tutorials/assets/terminal.png)
+![Integrated Terminal](assets/terminal.png)
 
 ##  3. <a name='InitialSetup'></a>Initial Setup
 We need to get our project set up so that we can begin.
@@ -192,7 +192,7 @@ This itself does nothing, as the game contains no actual "stuff" for us to displ
 
 Download the following image: [[LINK]](https://cdn.discordapp.com/icons/172773076881113090/f9ee342ca79fbaef5a869dfe7d8803cd.png)
 
-![GGC Logo](https://graloth.github.io/Phaser-Tutorials/assets/ggc.png)
+![GGC Logo](assets/ggc.png)
 
 I suggest renaming the file, in my case I renamed it to `ggc.png` and put it into the `assets/` folder, I highly recommend you do the same, so you can more easily follow along.  
 Let's add the image to our game. First we need to preload it, to make sure it is loaded into memory so we can render it later.
@@ -422,7 +422,7 @@ If you want to debug your code properly in Google Chrome, here we will explain w
 ###  9.2. <a name='Breakpoints'></a>Breakpoints
 Breakpoints is a way to tell the debugger to stop execution of our code, at the point we specify. In VSCode you specify a breakpoint the same was as in many other programming tools, by clicking in the left margin that also has the line numbers. A red dot appears when a breakpoint has been set, and it can be removed by clicking it again.
 
-![Breakpoint Example](https://graloth.github.io/Phaser-Tutorials/assets/breakpoint.png)
+![Breakpoint Example](assets/breakpoint.png)
 
 > For the more advanced needs, you can right-click the breakpoint and make a conditional breakpoint instead, such as one that only triggers when certain conditions are met.
 
@@ -446,7 +446,7 @@ console.debug("Logo Height:".concat(logo.height));
 If you save the file, make sure the server is running, and then enable debugging by hitting F5, it should now display in the debug console (both in VSCode and the browsers own Developer Tools Console).
 It should look something like this:
 
-![Debug Console Output](https://graloth.github.io/Phaser-Tutorials/assets/debugConsole.png)
+![Debug Console Output](assets/debugConsole.png)
 
 You can now output messages to the console, enjoy being able to debug more abstract data.
 
