@@ -10,25 +10,6 @@
         "HTML"
     ],
     "markdownConverter.document": {
-        "emoji": "github",
-        "layout": {
-            "margin": {
-                "top": "1cm",
-                "right": "1cm",
-                "bottom": "1cm",
-                "left": "1cm"
-            },
-            "format": "A4",
-            "orientation": "portrait"
-        },
-        "header": {
-            "height": "15mm",
-            "content": "<table style=\"width: 100%; table-layout: fixed; \"><td style=\"text-align: left; \">{{ Author }}</td><td style=\"text-align: center\">{{ PageNumber }}/{{ PageCount }}</td><td style=\"text-align: right\">{{ Company.Name }}</td></table>"
-        },
-        "footer": {
-            "height": "1cm",
-            "content": "<table style=\"width: 100%; table-layout: fixed; \"><td style=\"text-align: left; \"></td><td style=\"text-align: center\">{{ CreationDate }}</td><td style=\"text-align: right\"></td></table>"
-        },
         "style":{
             "useSystemStyles": false,
             "styleSheets": [
