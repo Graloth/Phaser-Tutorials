@@ -4,6 +4,7 @@
 This is the first in a tutorial series that aims to help you get started with the Phaser game framework.  
 In this first tutorial, we will focus on getting your development environment installed and properly configured.
 
+# Table of Contents
 <!-- vscode-markdown-toc -->
 * 1. [Prerequisites](#Prerequisites)
 * 2. [Visual Studio Code](#VisualStudioCode)
@@ -35,6 +36,8 @@ In this first tutorial, we will focus on getting your development environment in
 	autoSave=true
 	/vscode-markdown-toc-config -->
 <!-- /vscode-markdown-toc -->
+  
+---
 
 ##  1. <a name='Prerequisites'></a>Prerequisites
 In order to follow along more easily in this tutorial, I highly recommend you download the following items.

@@ -28,6 +28,11 @@
         "footer": {
             "height": "1cm",
             "content": "<table style=\"width: 100%; table-layout: fixed; \"><td style=\"text-align: left; \"></td><td style=\"text-align: center\">{{ CreationDate }}</td><td style=\"text-align: right\"></td></table>"
+        },
+        "style":{
+            "styleSheets": [
+                "css/main.css"
+            ]
         }
     }
 }
