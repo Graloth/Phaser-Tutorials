@@ -1,4 +1,4 @@
-**[&laquo; Back to Index](index.html)**.
+**[&laquo; Back to Index](/)**.
 
 # Development Environment
 This is the first in a tutorial series that aims to help you get started with the Phaser game framework.  
