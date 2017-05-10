@@ -32,6 +32,7 @@
         "style":{
             "useSystemStyles": false,
             "styleSheets": [
+                "css/fira_code.css",
                 "css/main.css",
                 "css/markdown.css"
             ]

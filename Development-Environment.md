@@ -1,4 +1,4 @@
-**[&laquo; Back to Index](/Phaser-Tutorials/)**.
+**[<== Back to Index](/Phaser-Tutorials/)**.
 
 # Development Environment for Phaser Game Development
 This is the first in a tutorial series that aims to help you get started with the Phaser game framework.  
