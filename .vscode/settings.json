@@ -30,8 +30,10 @@
             "content": "<table style=\"width: 100%; table-layout: fixed; \"><td style=\"text-align: left; \"></td><td style=\"text-align: center\">{{ CreationDate }}</td><td style=\"text-align: right\"></td></table>"
         },
         "style":{
+            "useSystemStyles": false,
             "styleSheets": [
-                "css/main.css"
+                "css/main.css",
+                "css/markdown.css"
             ]
         }
     }

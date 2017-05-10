@@ -1,0 +1,9 @@
+dl dt {
+    list-style:disc outside none;
+    display:list-item; 
+    -webkit-margin-start: 40px;
+}
+
+dl dd {
+    -webkit-margin-start: 40px;
+}

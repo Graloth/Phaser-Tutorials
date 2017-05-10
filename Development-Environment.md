@@ -1,6 +1,6 @@
 **[&laquo; Back to Index](/Phaser-Tutorials/)**.
 
-# Development Environment
+# Development Environment for Phaser Game Development
 This is the first in a tutorial series that aims to help you get started with the Phaser game framework.  
 In this first tutorial, we will focus on getting your development environment installed and properly configured.
 
@@ -62,7 +62,7 @@ In order to make your life a while lot easier, make sure the following options a
 
 You can also have it create a desktop icon for easier access to VSCode in the future.
 
-![Visual Studio Code Interface](https://graloth.github.io/Phaser-Tutorials/assets/vscode-install.png)
+![Visual Studio Code Interface](assets/vscode-install.png)
 
 > The above image highlights the options that helps make your life easier when working with VSCode.
 
