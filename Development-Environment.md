@@ -139,7 +139,7 @@ In order to get Phase Intellisense to properly work, some files need to be copie
     * `typings.json`
 
 The files inside the `js/defs/` folder are needed to make VSCode's intellisense recognize Phaser, but even after all this, it still won't work, we need *one* more thing done for intellisense to work.  
-In the ´js/`folder, create a new file named `jsconfig.json`, with the following content inside:
+In the `js/` folder, create a new file named `jsconfig.json`, with the following content inside:
 ```json
 { }
 ```
