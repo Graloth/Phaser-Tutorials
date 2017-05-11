@@ -96,7 +96,7 @@ We need to get our project set up so that we can begin.
     * `css/`
     * `js/`
     * `js/vendor/`
-    * `defs/`   
+    * `js/defs/`   
 4. In your `js/` folder, create a new file named `game.js`, you can leave it empty for now, but this is where we will add our game code.
 5. Open the downloaded *Phaser* zip-file, and inside the `build` folder, copy all the files to your `js/vendor/` folder, **except** the following files:
     * the `custom/` folder
@@ -128,8 +128,8 @@ We need to get our project set up so that we can begin.
 ##  4. <a name='MakingPhaserIntellisensework'></a>Making Phaser Intellisense work
 In order to get Phase Intellisense to properly work, some files need to be copied and created.
 
-1. Open the `defs/` folder in your file browser.
-2. Open the downloaded *Phaser* zip-file, and inside the `typescript` folder, copy the following file to your `defs/` folder:
+1. Open the `js/defs/` folder in your file browser.
+2. Open the downloaded *Phaser* zip-file, and inside the `typescript` folder, copy the following file to your `js/defs/` folder:
     * `box2d.d.ts`
     * `p2.d.ts`
     * `phaser.comments.d.ts`
@@ -138,12 +138,12 @@ In order to get Phase Intellisense to properly work, some files need to be copie
     * `tslint.json`
     * `typings.json`
 
-The files inside the `defs/` folder are needed to make VSCode's intellisense recognize Phaser, but even after all this, it still won't work, we need *one* more thing done for intellisense to work.  
-In the root of your project, create a new file named `jsconfig.json`, with the following content inside:
+The files inside the `js/defs/` folder are needed to make VSCode's intellisense recognize Phaser, but even after all this, it still won't work, we need *one* more thing done for intellisense to work.  
+In the ´js/`folder, create a new file named `jsconfig.json`, with the following content inside:
 ```json
 { }
 ```
-This simply tells VSCode that your project is a Javascript project, and then it looks for additional definitions in the `defs/` folder, and loads them for intellisense.
+This simply tells VSCode that your project is a Javascript project, and then it looks for additional definitions in the `js/defs/` folder, and loads them for intellisense.
 
 > You can add settings to your `jsconfig.json` file, but it is outside the scope of this tutorial to explain that.
 

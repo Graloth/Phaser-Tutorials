@@ -866,7 +866,7 @@ In order to make your life a while lot easier, make sure the following options a
 <li><code>css/</code></li>
 <li><code>js/</code></li>
 <li><code>js/vendor/</code></li>
-<li><code>defs/</code></li>
+<li><code>js/defs/</code></li>
 </ul>
 </li>
 <li>In your <code>js/</code> folder, create a new file named <code>game.js</code>, you can leave it empty for now, but this is where we will add our game code.</li>
@@ -904,8 +904,8 @@ In order to make your life a while lot easier, make sure the following options a
 <h2 id="4-making-phaser-intellisense-work">4. <a name='MakingPhaserIntellisensework'></a>Making Phaser Intellisense work</h2>
 <p>In order to get Phase Intellisense to properly work, some files need to be copied and created.</p>
 <ol>
-<li>Open the <code>defs/</code> folder in your file browser.</li>
-<li>Open the downloaded <em>Phaser</em> zip-file, and inside the <code>typescript</code> folder, copy the following file to your <code>defs/</code> folder:
+<li>Open the <code>js/defs/</code> folder in your file browser.</li>
+<li>Open the downloaded <em>Phaser</em> zip-file, and inside the <code>typescript</code> folder, copy the following file to your <code>js/defs/</code> folder:
 <ul>
 <li><code>box2d.d.ts</code></li>
 <li><code>p2.d.ts</code></li>
@@ -917,11 +917,11 @@ In order to make your life a while lot easier, make sure the following options a
 </ul>
 </li>
 </ol>
-<p>The files inside the <code>defs/</code> folder are needed to make VSCode's intellisense recognize Phaser, but even after all this, it still won't work, we need <em>one</em> more thing done for intellisense to work.<br>
-In the root of your project, create a new file named <code>jsconfig.json</code>, with the following content inside:</p>
+<p>The files inside the <code>js/defs/</code> folder are needed to make VSCode's intellisense recognize Phaser, but even after all this, it still won't work, we need <em>one</em> more thing done for intellisense to work.<br>
+In the ´js/<code>folder, create a new file named</code>jsconfig.json`, with the following content inside:</p>
 <pre class="hljs"><code><div>{ }
 </div></code></pre>
-<p>This simply tells VSCode that your project is a Javascript project, and then it looks for additional definitions in the <code>defs/</code> folder, and loads them for intellisense.</p>
+<p>This simply tells VSCode that your project is a Javascript project, and then it looks for additional definitions in the <code>js/defs/</code> folder, and loads them for intellisense.</p>
 <blockquote>
 <p>You can add settings to your <code>jsconfig.json</code> file, but it is outside the scope of this tutorial to explain that.</p>
 </blockquote>
